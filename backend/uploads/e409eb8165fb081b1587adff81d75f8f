@@ -1,0 +1,65 @@
+<productivityTool>
+    <toolName>FocusMaster</toolName>
+    <version>1.2.0</version>
+    <tasks>
+        <task>
+            <id>T001</id>
+            <name>Complete Project Report</name>
+            <category>Work</category>
+            <priority>High</priority>
+            <status>In Progress</status>
+            <deadline unit="days">2025-02-05</deadline>
+            <progress percentage="60"/>
+            <notes>Gathering data and finalizing conclusions.</notes>
+        </task>
+        <task>
+            <id>T002</id>
+            <name>Read "Atomic Habits" Book</name>
+            <category>Personal</category>
+            <priority>Medium</priority>
+            <status>Not Started</status>
+            <deadline unit="days">2025-03-15</deadline>
+            <progress percentage="0"/>
+            <notes>Read chapters 1-3 by the end of the week.</notes>
+        </task>
+        <task>
+            <id>T003</id>
+            <name>Organize Home Office</name>
+            <category>Home</category>
+            <priority>Low</priority>
+            <status>Not Started</status>
+            <deadline unit="days">2025-02-20</deadline>
+            <progress percentage="0"/>
+            <notes>Declutter workspace and set up ergonomic chair.</notes>
+        </task>
+        <task>
+            <id>T004</id>
+            <name>Develop New Feature for App</name>
+            <category>Work</category>
+            <priority>High</priority>
+            <status>In Progress</status>
+            <deadline unit="days">2025-02-10</deadline>
+            <progress percentage="40"/>
+            <notes>Working on UI improvements and bug fixes.</notes>
+        </task>
+    </tasks>
+    <categories>
+        <category name="Work">
+            <description>Tasks related to professional and career growth.</description>
+            <tasksCount>2</tasksCount>
+        </category>
+        <category name="Personal">
+            <description>Tasks for self-improvement and leisure.</description>
+            <tasksCount>1</tasksCount>
+        </category>
+        <category name="Home">
+            <description>Household-related tasks and organization.</description>
+            <tasksCount>1</tasksCount>
+        </category>
+    </categories>
+    <settings>
+        <theme>Dark</theme>
+        <remindersEnabled>true</remindersEnabled>
+        <syncEnabled>true</syncEnabled>
+    </settings>
+</productivityTool>
