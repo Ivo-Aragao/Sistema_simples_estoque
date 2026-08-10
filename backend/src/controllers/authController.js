@@ -75,8 +75,7 @@ tokenExpiraEm:expira
 });
 
 
-const link=`http://localhost:5173/redefinir-senha?token=${token}`;
-
+const link = `${process.env.FRONTEND_URL}/redefinir-senha?token=${token}`;
 
 await transporter.sendMail({
 
