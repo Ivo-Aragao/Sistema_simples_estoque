@@ -17,32 +17,50 @@ function PrivateRoute({ children }) {
 
 export default function App() {
   return (
-   <Routes>
+    <Routes>
+      <Route path="/login" element={<Login />} />
 
-  <Route path="/login" element={<Login />} />
+      <Route
+        path="/esqueci-senha"
+        element={<EsqueciSenha />}
+      />
 
-  <Route path="/esqueci-senha" element={<EsqueciSenha />} />
+      <Route
+        path="/redefinir-senha"
+        element={<RedefinirSenha />}
+      />
 
-  <Route path="/redefinir-senha" element={<RedefinirSenha />} />
+      <Route
+        path="/vendas"
+        element={
+          <PrivateRoute>
+            <Vendas />
+          </PrivateRoute>
+        }
+      />
 
-  <Route path="/vendas" element={<Vendas />} />
-  <Route
-    path="/"
-    element={
-      <PrivateRoute>
-        <Layout />
-      </PrivateRoute>
-    }
-  >
-    <Route index element={<Dashboard />} />
-    <Route path="produtos" element={<Produtos />} />
-    <Route path="movimentacoes" element={<Movimentacoes />} />
-    <Route path="xml-nfe" element={<XmlNfe />} />
-    <Route path="relatorios" element={<Relatorios />} />
-  </Route>
+      <Route
+        path="/"
+        element={
+          <PrivateRoute>
+            <Layout />
+          </PrivateRoute>
+        }
+      >
+        <Route index element={<Dashboard />} />
+        <Route path="produtos" element={<Produtos />} />
+        <Route
+          path="movimentacoes"
+          element={<Movimentacoes />}
+        />
+        <Route path="xml-nfe" element={<XmlNfe />} />
+        <Route path="relatorios" element={<Relatorios />} />
+      </Route>
 
-  <Route path="*" element={<Navigate to="/" replace />} />
-
-</Routes>
+      <Route
+        path="*"
+        element={<Navigate to="/" replace />}
+      />
+    </Routes>
   );
 }

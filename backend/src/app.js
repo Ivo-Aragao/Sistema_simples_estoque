@@ -10,6 +10,7 @@ const categoriaRoutes = require("./routes/categoriaRoutes");
 const fornecedorRoutes = require("./routes/fornecedorRoutes");
 const importacaoRoutes = require("./routes/importacaoRoutes");
 const empresaRoutes = require("./routes/empresaRoutes");
+const vendaRoutes = require("./routes/vendaRoutes");
 const app = express();
 
 app.use(cors());
@@ -24,6 +25,7 @@ app.use("/categorias", categoriaRoutes);
 app.use("/empresa", empresaRoutes);
 app.use("/fornecedores", fornecedorRoutes);
 app.use("/importacoes", importacaoRoutes);
+app.use("/vendas", vendaRoutes);
 
 app.get("/", (req, res) => {
   res.json({ message: "API do sistema de estoque funcionando" });

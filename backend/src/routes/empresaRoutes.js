@@ -1,5 +1,6 @@
 const express = require("express");
-const authMiddleware = require("../middleware/authMiddleware");
+
+const authMiddleware = require("../middlewares/authMiddleware");
 
 const {
   obterEmpresa,
@@ -9,6 +10,7 @@ const {
 const router = express.Router();
 
 router.get("/", authMiddleware, obterEmpresa);
+
 router.put("/", authMiddleware, atualizarEmpresa);
 
 module.exports = router;
