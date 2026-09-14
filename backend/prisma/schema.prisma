@@ -20,6 +20,7 @@ model Usuario {
   empresaId Int?
   empresa   Empresa? @relation(fields: [empresaId], references: [id])
 
+  vendas Venda[]
   movimentacoes Movimentacao[]
 }
 
@@ -27,6 +28,7 @@ model Empresa {
   id        Int       @id @default(autoincrement())
   nome      String
   logoUrl   String?
+  vendas Venda[]
   usuarios  Usuario[]
 }
 
@@ -60,6 +62,7 @@ model Produto {
 
   categoria    Categoria?  @relation(fields: [categoriaId], references: [id])
   fornecedor   Fornecedor? @relation(fields: [fornecedorId], references: [id])
+  itensVenda ItemVenda[]
   movimentacoes Movimentacao[]
 }
 
@@ -74,4 +77,34 @@ model Movimentacao {
 
   produto Produto   @relation(fields: [produtoId], references: [id])
   usuario Usuario?  @relation(fields: [usuarioId], references: [id])
+}
+model Venda {
+  id             Int       @id @default(autoincrement())
+  codigo         String    @unique @default(cuid())
+  usuarioId      Int
+  empresaId      Int?
+  subtotal       Float
+  desconto       Float     @default(0)
+  total          Float
+  formaPagamento String
+  status         String    @default("FINALIZADA")
+  observacao     String?
+  criadoEm       DateTime  @default(now())
+
+  usuario Usuario  @relation(fields: [usuarioId], references: [id])
+  empresa Empresa? @relation(fields: [empresaId], references: [id])
+  itens   ItemVenda[]
+}
+
+model ItemVenda {
+  id            Int      @id @default(autoincrement())
+  vendaId       Int
+  produtoId     Int
+  nomeProduto   String
+  quantidade    Int
+  precoUnitario Float
+  subtotal      Float
+
+  venda   Venda   @relation(fields: [vendaId], references: [id])
+  produto Produto @relation(fields: [produtoId], references: [id])
 }
