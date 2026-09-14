@@ -17,7 +17,17 @@ model Usuario {
   tokenRecuperacao String?
   tokenExpiraEm    DateTime?
 
+  empresaId Int?
+  empresa   Empresa? @relation(fields: [empresaId], references: [id])
+
   movimentacoes Movimentacao[]
+}
+
+model Empresa {
+  id        Int       @id @default(autoincrement())
+  nome      String
+  logoUrl   String?
+  usuarios  Usuario[]
 }
 
 model Categoria {
@@ -35,33 +45,33 @@ model Fornecedor {
 }
 
 model Produto {
-  id             Int      @id @default(autoincrement())
-  nome           String
-  codigoBarra    String?  @unique
-  descricao      String?
-  precoCusto     Float
-  precoVenda     Float
-  quantidade     Int      @default(0)
-  estoqueMinimo  Int      @default(5)
-  categoriaId    Int?
-  fornecedorId   Int?
-  criadoEm       DateTime @default(now())
-  ativo          Boolean  @default(true)
+  id            Int      @id @default(autoincrement())
+  nome          String
+  codigoBarra   String?  @unique
+  descricao     String?
+  precoCusto    Float
+  precoVenda    Float
+  quantidade    Int      @default(0)
+  estoqueMinimo Int      @default(5)
+  categoriaId   Int?
+  fornecedorId  Int?
+  criadoEm     DateTime @default(now())
+  ativo         Boolean  @default(true)
 
-  categoria      Categoria?  @relation(fields: [categoriaId], references: [id])
-  fornecedor     Fornecedor? @relation(fields: [fornecedorId], references: [id])
-  movimentacoes   Movimentacao[]
+  categoria    Categoria?  @relation(fields: [categoriaId], references: [id])
+  fornecedor   Fornecedor? @relation(fields: [fornecedorId], references: [id])
+  movimentacoes Movimentacao[]
 }
 
 model Movimentacao {
-  id            Int      @id @default(autoincrement())
-  produtoId     Int
-  usuarioId     Int?
-  tipo          String
-  quantidade    Int
-  observacao    String?
+  id               Int      @id @default(autoincrement())
+  produtoId        Int
+  usuarioId        Int?
+  tipo             String
+  quantidade       Int
+  observacao       String?
   dataMovimentacao DateTime @default(now())
 
-  produto       Produto   @relation(fields: [produtoId], references: [id])
-  usuario       Usuario?  @relation(fields: [usuarioId], references: [id])
+  produto Produto   @relation(fields: [produtoId], references: [id])
+  usuario Usuario?  @relation(fields: [usuarioId], references: [id])
 }
