@@ -15,6 +15,10 @@ async function authMiddleware(req, res, next) {
       where: { id: decoded.id },
     });
 
+    if (!usuario) {
+      return res.status(401).json({ error: "Usuário não encontrado" });
+    }
+
     req.usuario = usuario;
 
     next();

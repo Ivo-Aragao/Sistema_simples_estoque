@@ -20,6 +20,15 @@ export default function Sidebar() {
         </NavLink>
 
         <NavLink
+          to="/vendas"
+          className={({ isActive }) =>
+            isActive ? "menu-link active" : "menu-link"
+          }
+        >
+          Vendas
+        </NavLink>
+        
+        <NavLink
           to="/produtos"
           className={({ isActive }) =>
             isActive ? "menu-link active" : "menu-link"

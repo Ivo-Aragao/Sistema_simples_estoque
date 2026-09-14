@@ -19,13 +19,20 @@ async function cadastrarUsuario(req, res) {
 
     const senhaHash = await bcrypt.hash(senha, 10);
 
-    const usuario = await prisma.usuario.create({
-      data: {
-        nome,
-        email,
-        senha: senhaHash,
-      },
-    });
+    const empresa = await prisma.empresa.create({
+  data: {
+    nome: nomeEmpresa,
+  },
+});
+
+const usuario = await prisma.usuario.create({
+  data: {
+    nome,
+    email,
+    senha: senhaHash,
+    empresaId: empresa.id,
+  },
+});
 
     res.status(201).json({
       id: usuario.id,

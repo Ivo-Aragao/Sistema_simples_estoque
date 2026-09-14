@@ -8,6 +8,7 @@ import Relatorios from "./pages/Relatorios";
 import XmlNfe from "./pages/XmlNfe";
 import EsqueciSenha from "./pages/EsqueciSenha";
 import RedefinirSenha from "./pages/RedefinirSenha";
+import Vendas from "./pages/Vendas";
 
 function PrivateRoute({ children }) {
   const token = localStorage.getItem("token");
@@ -24,6 +25,7 @@ export default function App() {
 
   <Route path="/redefinir-senha" element={<RedefinirSenha />} />
 
+  <Route path="/vendas" element={<Vendas />} />
   <Route
     path="/"
     element={
