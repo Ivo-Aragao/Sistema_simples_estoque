@@ -111,8 +111,70 @@ async function atualizarEmpresa(req, res) {
     });
   }
 }
+async function atualizarLogo(req, res) {
+  try {
+    if (!req.file) {
+      return res.status(400).json({
+        error: "Nenhuma imagem foi enviada.",
+      });
+    }
+
+    const usuario = await prisma.usuario.findUnique({
+      where: {
+        id: req.usuario.id,
+      },
+    });
+
+    if (!usuario) {
+      return res.status(404).json({
+        error: "Usuário não encontrado.",
+      });
+    }
+
+    let empresa;
+
+    if (usuario.empresaId) {
+      empresa = await prisma.empresa.update({
+        where: {
+          id: usuario.empresaId,
+        },
+        data: {
+          logoUrl: req.file.path,
+        },
+      });
+    } else {
+      empresa = await prisma.empresa.create({
+        data: {
+          nome: "Minha Empresa",
+          logoUrl: req.file.path,
+        },
+      });
+
+      await prisma.usuario.update({
+        where: {
+          id: usuario.id,
+        },
+        data: {
+          empresaId: empresa.id,
+        },
+      });
+    }
+
+    return res.json(empresa);
+  } catch (error) {
+  console.error("ERRO COMPLETO AO ATUALIZAR LOGO:");
+  console.error(error);
+  console.error("message:", error?.message);
+  console.error("stack:", error?.stack);
+
+  return res.status(500).json({
+    error: error?.message || "Erro ao atualizar logo.",
+  });
+}
+}
 
 module.exports = {
   obterEmpresa,
   atualizarEmpresa,
+  atualizarLogo,
 };

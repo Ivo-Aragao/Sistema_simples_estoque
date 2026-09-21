@@ -20,16 +20,19 @@ model Usuario {
   empresaId Int?
   empresa   Empresa? @relation(fields: [empresaId], references: [id])
 
-  vendas Venda[]
-  movimentacoes Movimentacao[]
+  vendas           Venda[]
+  movimentacoes    Movimentacao[]
+  comandas         Comanda[]
 }
 
 model Empresa {
   id        Int       @id @default(autoincrement())
   nome      String
   logoUrl   String?
-  vendas Venda[]
+
+  vendas    Venda[]
   usuarios  Usuario[]
+  mesas     Mesa[]
 }
 
 model Categoria {
@@ -47,23 +50,27 @@ model Fornecedor {
 }
 
 model Produto {
-  id            Int      @id @default(autoincrement())
-  nome          String
-  codigoBarra   String?  @unique
-  descricao     String?
-  precoCusto    Float
-  precoVenda    Float
-  quantidade    Int      @default(0)
-  estoqueMinimo Int      @default(5)
-  categoriaId   Int?
-  fornecedorId  Int?
-  criadoEm     DateTime @default(now())
-  ativo         Boolean  @default(true)
+  id                Int      @id @default(autoincrement())
+  nome              String
+  codigoBarra       String?  @unique
+  descricao         String?
+  precoCusto        Float
+  precoVenda        Float
+  quantidade        Int      @default(0)
+  estoqueMinimo     Int      @default(5)
+  categoriaId       Int?
+  fornecedorId      Int?
+  criadoEm          DateTime @default(now())
+  ativo             Boolean  @default(true)
 
-  categoria    Categoria?  @relation(fields: [categoriaId], references: [id])
-  fornecedor   Fornecedor? @relation(fields: [fornecedorId], references: [id])
-  itensVenda ItemVenda[]
-  movimentacoes Movimentacao[]
+  disponivelVenda   Boolean  @default(true)
+  disponivelComanda Boolean  @default(false)
+
+  categoria         Categoria?    @relation(fields: [categoriaId], references: [id])
+  fornecedor        Fornecedor?   @relation(fields: [fornecedorId], references: [id])
+  itensVenda        ItemVenda[]
+  movimentacoes     Movimentacao[]
+  itensComanda      ComandaItem[]
 }
 
 model Movimentacao {
@@ -79,20 +86,22 @@ model Movimentacao {
   usuario Usuario?  @relation(fields: [usuarioId], references: [id])
 }
 model Venda {
-  id             Int       @id @default(autoincrement())
-  codigo         String    @unique @default(cuid())
+  id             Int      @id @default(autoincrement())
+  codigo         String   @unique @default(cuid())
   usuarioId      Int
   empresaId      Int?
+  comandaId      Int?     @unique
   subtotal       Float
-  desconto       Float     @default(0)
+  desconto       Float    @default(0)
   total          Float
   formaPagamento String
-  status         String    @default("FINALIZADA")
+  status         String   @default("FINALIZADA")
   observacao     String?
-  criadoEm       DateTime  @default(now())
+  criadoEm       DateTime @default(now())
 
   usuario Usuario  @relation(fields: [usuarioId], references: [id])
   empresa Empresa? @relation(fields: [empresaId], references: [id])
+  comanda Comanda? @relation(fields: [comandaId], references: [id])
   itens   ItemVenda[]
 }
 
@@ -107,4 +116,85 @@ model ItemVenda {
 
   venda   Venda   @relation(fields: [vendaId], references: [id])
   produto Produto @relation(fields: [produtoId], references: [id])
+}
+
+model Mesa {
+  id          Int      @id @default(autoincrement())
+  numero      Int
+  capacidade  Int?
+  status      String   @default("LIVRE")
+  observacao  String?
+
+  empresaId   Int?
+  empresa     Empresa? @relation(fields: [empresaId], references: [id])
+
+  comandas    Comanda[]
+
+  criadaEm    DateTime @default(now())
+
+  @@unique([empresaId, numero])
+}
+
+  model Comanda {
+  id        Int    @id @default(autoincrement())
+  codigo    String @unique @default(cuid())
+
+  mesaId        Int?
+  usuarioId     Int
+
+  status        String   @default("ABERTA")
+
+  observacao    String?
+
+  vendaId       Int?      @unique
+
+  criadoEm      DateTime  @default(now())
+  fechadoEm     DateTime?
+
+  mesa          Mesa?     @relation(fields: [mesaId], references: [id])
+  usuario       Usuario   @relation(fields: [usuarioId], references: [id])
+  venda         Venda?
+
+  itens         ComandaItem[]
+  pagamentos    Pagamento[]
+}
+
+model ComandaItem {
+  id            Int      @id @default(autoincrement())
+
+  comandaId     Int
+  produtoId     Int
+
+  quantidade    Int
+  quantidadeServida Int @default(0)
+
+  precoUnitario Float
+  subtotal      Float
+
+  observacao    String?
+
+  status        String   @default("PENDENTE")
+
+  criadoEm     DateTime  @default(now())
+  enviadoEm    DateTime?
+  preparandoEm DateTime?
+  prontoEm     DateTime?
+  servidoEm    DateTime?
+
+  comanda       Comanda  @relation(fields: [comandaId], references: [id])
+  produto       Produto  @relation(fields: [produtoId], references: [id])
+}
+
+model Pagamento {
+  id          Int      @id @default(autoincrement())
+
+  comandaId   Int
+
+  valor       Float
+  forma       String
+  status      String   @default("PAGO")
+
+  criadoEm    DateTime @default(now())
+
+  comanda     Comanda  @relation(fields: [comandaId], references: [id])
 }

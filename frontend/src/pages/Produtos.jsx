@@ -36,6 +36,7 @@ export default function Produtos() {
   };
 
   const carregarProdutos = async (page = 1) => {
+  try {
     const res = await api.get("/produtos", {
       params: {
         q: busca,
@@ -47,16 +48,28 @@ export default function Produtos() {
       },
     });
 
-    setProdutos(res.data.itens || []);
+    setProdutos(res.data?.itens || []);
+
     setMeta(
-      res.data.meta || {
+      res.data?.meta || {
         total: 0,
         page: 1,
         limit: 10,
         totalPages: 1,
       }
     );
-  };
+  } catch (error) {
+    console.error(
+      "Erro ao carregar produtos:",
+      error
+    );
+
+    alert(
+      error.response?.data?.error ||
+        "Erro ao carregar produtos."
+    );
+  }
+};
 
   useEffect(() => {
     carregarFiltros();

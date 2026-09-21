@@ -4,7 +4,7 @@ export default function Sidebar() {
   return (
     <aside className="sidebar">
       <div>
-        <div className="brand">Estoque Fácil</div>
+        <div className="brand">Gestão facil</div>
         <p className="brand-sub">Gestão simples para pequenos negócios</p>
       </div>
 
@@ -27,7 +27,16 @@ export default function Sidebar() {
         >
           Vendas
         </NavLink>
-        
+          <NavLink
+            to="/mesas"
+            className={({ isActive }) =>
+              isActive
+                ? "menu-link active"
+                : "menu-link"
+            }
+          >
+            Restaurante
+          </NavLink>
         <NavLink
           to="/produtos"
           className={({ isActive }) =>
@@ -61,6 +70,15 @@ export default function Sidebar() {
           }
         >
           Relatórios
+        </NavLink>
+
+        <NavLink 
+        to="/configuracoes"
+        className={({ isActive }) =>
+            isActive ? "menu-link active" : "menu-link"
+          }
+        >
+          Configurações
         </NavLink>
       </nav>
     </aside>

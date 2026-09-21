@@ -1,0 +1,1091 @@
+/* =========================================================
+   PÁGINA
+========================================================= */
+
+.comanda-page {
+  min-height: 100vh;
+  padding: 24px;
+  background: #f5f7fb;
+}
+
+.comanda-container {
+  max-width: 1500px;
+  margin: 0 auto;
+}
+
+.comanda-loading {
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  color: #667085;
+}
+
+/* =========================================================
+   CABEÇALHO
+========================================================= */
+
+.comanda-header {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 24px;
+}
+
+.comanda-btn-voltar {
+  border: 1px solid #d0d5dd;
+  background: #fff;
+  color: #344054;
+  padding: 10px 16px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.comanda-btn-voltar:hover {
+  background: #f9fafb;
+  border-color: #98a2b3;
+}
+
+.comanda-titulo {
+  flex: 1;
+}
+
+.comanda-titulo h1 {
+  margin: 0;
+  font-size: 28px;
+  color: #101828;
+}
+
+.comanda-subtitulo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 6px;
+  color: #667085;
+  font-size: 14px;
+}
+
+.comanda-status {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 9px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.comanda-status.aberta {
+  background: #dcfae6;
+  color: #067647;
+}
+
+.comanda-status.fechada {
+  background: #f2f4f7;
+  color: #475467;
+}
+
+/* =========================================================
+   BOTÃO FECHAR COMANDA
+========================================================= */
+
+.comanda-btn-fechar {
+  border: none;
+  background: #101828;
+  color: #fff;
+  padding: 12px 18px;
+  border-radius: 10px;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    transform 0.15s ease;
+}
+
+.comanda-btn-fechar:hover {
+  background: #1d2939;
+  transform: translateY(-1px);
+}
+
+.comanda-btn-fechar:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* =========================================================
+   GRID PRINCIPAL
+========================================================= */
+
+.comanda-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.6fr) minmax(340px, 0.9fr);
+  gap: 24px;
+  align-items: start;
+}
+
+.comanda-card {
+  background: #fff;
+  border: 1px solid #eaecf0;
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(16, 24, 40, 0.05);
+  overflow: hidden;
+}
+
+.comanda-card-header {
+  padding: 22px 24px;
+  border-bottom: 1px solid #eaecf0;
+}
+
+.comanda-card-header h2 {
+  margin: 0;
+  font-size: 20px;
+  color: #101828;
+}
+
+.comanda-card-header p {
+  margin: 6px 0 0;
+  font-size: 14px;
+  color: #667085;
+}
+
+/* =========================================================
+   BUSCA
+========================================================= */
+
+.comanda-busca {
+  padding: 18px 24px;
+}
+
+.comanda-busca input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 13px 15px;
+  border: 1px solid #d0d5dd;
+  border-radius: 10px;
+  outline: none;
+  font-size: 15px;
+  background: #fff;
+  color: #101828;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.comanda-busca input:focus {
+  border-color: #98a2b3;
+  box-shadow:
+    0 0 0 3px rgba(16, 24, 40, 0.06);
+}
+
+/* =========================================================
+   LISTA DE PRODUTOS
+========================================================= */
+
+.comanda-produtos-lista {
+  padding: 0 24px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.produto-comanda {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 15px;
+  border: 1px solid #eaecf0;
+  border-radius: 12px;
+  background: #fff;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.produto-comanda:hover {
+  border-color: #d0d5dd;
+  box-shadow: 0 3px 10px rgba(16, 24, 40, 0.04);
+}
+
+.produto-comanda-info {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.produto-comanda-info strong {
+  color: #101828;
+  font-size: 15px;
+}
+
+.produto-comanda-info span {
+  color: #344054;
+  font-weight: 700;
+}
+
+.produto-comanda-info small {
+  color: #667085;
+}
+
+.produto-comanda-acoes {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.produto-comanda-acoes input {
+  width: 68px;
+  padding: 10px;
+  border: 1px solid #d0d5dd;
+  border-radius: 8px;
+  text-align: center;
+  outline: none;
+  background: #fff;
+  color: #101828;
+}
+
+.produto-comanda-acoes input:focus {
+  border-color: #98a2b3;
+  box-shadow:
+    0 0 0 3px rgba(16, 24, 40, 0.05);
+}
+
+.produto-comanda-acoes button {
+  border: none;
+  background: #101828;
+  color: #fff;
+  padding: 10px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition:
+    background 0.2s ease,
+    transform 0.15s ease;
+}
+
+.produto-comanda-acoes button:hover {
+  background: #1d2939;
+  transform: translateY(-1px);
+}
+
+.produto-comanda-acoes button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* =========================================================
+   ITENS DA COMANDA
+========================================================= */
+
+.comanda-itens {
+  padding: 18px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.comanda-item {
+  padding: 15px;
+  border: 1px solid #eaecf0;
+  border-radius: 12px;
+  background: #fff;
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.comanda-item:hover {
+  border-color: #d0d5dd;
+}
+
+/* =========================================================
+   CORES DOS STATUS
+========================================================= */
+
+.comanda-item.status-pendente {
+  border-left: 4px solid #98a2b3;
+}
+
+.comanda-item.status-enviado {
+  border-left: 4px solid #3b82f6;
+  background: #f8fbff;
+}
+
+.comanda-item.status-preparando {
+  border-left: 4px solid #f59e0b;
+  background: #fffcf5;
+}
+
+.comanda-item.status-pronto {
+  border-left: 4px solid #16a34a;
+  background: #f7fff9;
+}
+
+.comanda-item.status-parcialmente_servido {
+  border-left: 4px solid #7c3aed;
+  background: #fbf9ff;
+}
+
+.comanda-item.status-servido {
+  border-left: 4px solid #16a34a;
+  background: #f4fff7;
+}
+
+/* =========================================================
+   CABEÇALHO DO ITEM
+========================================================= */
+
+.comanda-item-topo {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.comanda-item-topo > div:first-child {
+  min-width: 0;
+}
+
+.comanda-item-topo strong {
+  display: block;
+  color: #101828;
+  font-size: 15px;
+  line-height: 1.3;
+}
+
+/* =========================================================
+   BADGE DE STATUS
+========================================================= */
+
+.comanda-item-status {
+  margin-top: 7px;
+}
+
+.status-item-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 9px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+/* PENDENTE */
+
+.status-item-badge.status-pendente {
+  background: #f2f4f7;
+  color: #475467;
+}
+
+/* ENVIADO */
+
+.status-item-badge.status-enviado {
+  background: #dbeafe;
+  color: #1d4ed8;
+}
+
+/* PREPARANDO */
+
+.status-item-badge.status-preparando {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+/* PRONTO */
+
+.status-item-badge.status-pronto {
+  background: #dcfce7;
+  color: #166534;
+}
+
+/* PARCIALMENTE SERVIDO */
+
+.status-item-badge.status-parcialmente_servido {
+  background: #ede9fe;
+  color: #6d28d9;
+}
+
+/* SERVIDO */
+
+.status-item-badge.status-servido {
+  background: #dcfce7;
+  color: #166534;
+}
+
+/* =========================================================
+   REMOVER ITEM
+========================================================= */
+
+.comanda-item-remover {
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: transparent;
+  color: #b42318;
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+  border-radius: 8px;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
+}
+
+.comanda-item-remover:hover {
+  background: #fef3f2;
+  color: #912018;
+}
+
+.comanda-item-remover:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+  background: transparent;
+}
+
+/* =========================================================
+   INFORMAÇÕES DO ITEM
+========================================================= */
+
+.comanda-item-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 10px;
+  color: #667085;
+  font-size: 13px;
+}
+
+.comanda-item-info span:last-child {
+  color: #101828;
+  font-weight: 700;
+}
+
+/* =========================================================
+   CONTROLE DE SERVIÇO
+========================================================= */
+
+.comanda-item-servico {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  background: #f8fafc;
+  color: #475467;
+  font-size: 13px;
+}
+
+.comanda-item-servico strong {
+  color: #101828;
+}
+
+/* =========================================================
+   AÇÕES DO ITEM
+========================================================= */
+
+.comanda-item-acoes {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 8px;
+  margin-top: 12px;
+  flex-wrap: wrap;
+}
+
+/* Botões + e - */
+
+.comanda-item-acoes > button:not(.comanda-btn-status) {
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  border: 1px solid #d0d5dd;
+  background: #fff;
+  color: #344054;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 18px;
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.comanda-item-acoes > button:not(.comanda-btn-status):hover {
+  background: #f9fafb;
+  border-color: #98a2b3;
+}
+
+.comanda-item-acoes > button:not(.comanda-btn-status):disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* Número da quantidade */
+
+.comanda-item-acoes > span:not(.comanda-item-servido) {
+  min-width: 20px;
+  text-align: center;
+  font-weight: 700;
+  color: #101828;
+}
+
+/* =========================================================
+   BOTÃO DE STATUS
+========================================================= */
+
+.comanda-btn-status {
+  min-height: 34px;
+  border: none;
+  background: #101828;
+  color: #fff;
+  padding: 8px 13px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 700;
+  transition:
+    background 0.2s ease,
+    transform 0.15s ease;
+}
+
+.comanda-btn-status:hover {
+  background: #1d2939;
+  transform: translateY(-1px);
+}
+
+.comanda-btn-status:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* =========================================================
+   SERVIDO
+========================================================= */
+
+.comanda-item-servido {
+  display: inline-flex;
+  align-items: center;
+  min-height: 34px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  background: #dcfce7;
+  color: #166534;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+/* =========================================================
+   VAZIO
+========================================================= */
+
+.comanda-vazio {
+  padding: 30px 10px;
+  text-align: center;
+  color: #667085;
+}
+
+/* =========================================================
+   TOTAIS
+========================================================= */
+
+.comanda-totais {
+  padding: 20px 24px;
+  border-top: 1px solid #eaecf0;
+}
+
+.comanda-total-linha {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 12px;
+  color: #667085;
+}
+
+.comanda-total-linha strong {
+  color: #101828;
+}
+
+.comanda-total-final {
+  margin-top: 16px;
+  margin-bottom: 0;
+  padding-top: 16px;
+  border-top: 1px solid #eaecf0;
+  font-size: 18px;
+  color: #101828;
+}
+
+.comanda-total-final strong {
+  font-size: 24px;
+}
+
+/* =========================================================
+   BOTÃO PRINCIPAL
+========================================================= */
+
+.comanda-btn-principal {
+  width: calc(100% - 48px);
+  margin: 0 24px 24px;
+  border: none;
+  background: #101828;
+  color: #fff;
+  padding: 14px 18px;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    transform 0.15s ease;
+}
+
+.comanda-btn-principal:hover {
+  background: #1d2939;
+  transform: translateY(-1px);
+}
+
+.comanda-btn-principal:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* =========================================================
+   MODAL DE PAGAMENTO
+========================================================= */
+
+.pagamento-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(15, 23, 42, 0.65);
+  backdrop-filter: blur(4px);
+}
+
+.pagamento-modal {
+  width: 100%;
+  max-width: 520px;
+  max-height: calc(100vh - 40px);
+  overflow-y: auto;
+  background: #ffffff;
+  border-radius: 20px;
+  box-shadow:
+    0 25px 60px rgba(15, 23, 42, 0.22),
+    0 8px 20px rgba(15, 23, 42, 0.10);
+}
+
+/* =========================================================
+   CABEÇALHO DO PAGAMENTO
+========================================================= */
+
+.pagamento-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 22px 24px;
+  border-bottom: 1px solid #eaecf0;
+}
+
+.pagamento-header h2 {
+  margin: 0;
+  font-size: 22px;
+  line-height: 1.2;
+  color: #101828;
+}
+
+.pagamento-header p {
+  margin: 7px 0 0;
+  font-size: 14px;
+  color: #667085;
+}
+
+.pagamento-fechar {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: none;
+  border-radius: 9px;
+  background: transparent;
+  color: #667085;
+  font-size: 26px;
+  line-height: 1;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
+}
+
+.pagamento-fechar:hover {
+  background: #f2f4f7;
+  color: #101828;
+}
+
+.pagamento-fechar:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* =========================================================
+   VALORES DO PAGAMENTO
+========================================================= */
+
+.pagamento-total,
+.pagamento-restante {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 24px;
+}
+
+.pagamento-total {
+  border-bottom: 1px solid #eaecf0;
+}
+
+.pagamento-total span,
+.pagamento-restante span {
+  font-size: 14px;
+  color: #667085;
+}
+
+.pagamento-total strong {
+  font-size: 22px;
+  font-weight: 800;
+  color: #101828;
+}
+
+.pagamento-restante {
+  margin: 18px 24px 0;
+  padding: 16px 18px;
+  border: 1px solid #eaecf0;
+  border-radius: 12px;
+  background: #f8fafc;
+}
+
+.pagamento-restante span {
+  color: #344054;
+  font-weight: 600;
+}
+
+.pagamento-restante strong {
+  font-size: 22px;
+  font-weight: 800;
+  color: #101828;
+}
+
+/* =========================================================
+   FORMULÁRIO DE PAGAMENTO
+========================================================= */
+
+.pagamento-form {
+  padding: 24px;
+}
+
+.pagamento-form label {
+  display: block;
+  margin: 0 0 9px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #344054;
+}
+
+.pagamento-form label[for="valorPagamento"] {
+  margin-top: 22px;
+}
+
+.pagamento-form > input {
+  display: block;
+  width: 100%;
+  min-height: 52px;
+  box-sizing: border-box;
+  padding: 12px 14px;
+  border: 1px solid #d0d5dd;
+  border-radius: 10px;
+  background: #ffffff;
+  color: #101828;
+  font-size: 18px;
+  font-weight: 700;
+  outline: none;
+}
+
+.pagamento-form > input:focus {
+  border-color: #101828;
+  box-shadow:
+    0 0 0 3px rgba(16, 24, 40, 0.08);
+}
+
+/* =========================================================
+   FORMAS DE PAGAMENTO
+========================================================= */
+
+.formas-pagamento {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  width: 100%;
+}
+
+.formas-pagamento button {
+  min-width: 0;
+  min-height: 92px;
+  padding: 14px 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 1px solid #d0d5dd;
+  border-radius: 12px;
+  background: #ffffff;
+  color: #344054;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.15s ease,
+    box-shadow 0.2s ease;
+}
+
+.formas-pagamento button:hover {
+  background: #f9fafb;
+  border-color: #98a2b3;
+  transform: translateY(-1px);
+}
+
+.formas-pagamento button.forma-selecionada {
+  border-color: #101828;
+  background: #f2f4f7;
+  color: #101828;
+  box-shadow:
+    inset 0 0 0 1px #101828,
+    0 2px 6px rgba(16, 24, 40, 0.06);
+}
+
+.formas-pagamento button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.formas-pagamento button span {
+  display: block;
+  white-space: nowrap;
+}
+
+/* =========================================================
+   BOTÕES DO PAGAMENTO
+========================================================= */
+
+.pagamento-acoes {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 12px;
+  padding: 0 24px 24px;
+}
+
+.pagamento-cancelar,
+.pagamento-confirmar {
+  min-height: 50px;
+  border: none;
+  border-radius: 10px;
+  padding: 12px 16px;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    transform 0.15s ease;
+}
+
+.pagamento-cancelar {
+  background: #f2f4f7;
+  color: #344054;
+}
+
+.pagamento-cancelar:hover {
+  background: #e4e7ec;
+  transform: translateY(-1px);
+}
+
+.pagamento-confirmar {
+  background: #101828;
+  color: #ffffff;
+}
+
+.pagamento-confirmar:hover {
+  background: #1d2939;
+  transform: translateY(-1px);
+}
+
+.pagamento-cancelar:disabled,
+.pagamento-confirmar:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 1000px) {
+  .comanda-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .comanda-resumo {
+    order: -1;
+  }
+}
+
+/* =========================================================
+   CELULAR
+========================================================= */
+
+@media (max-width: 700px) {
+  .comanda-page {
+    padding: 12px;
+  }
+
+  .comanda-header {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .comanda-titulo {
+    order: 2;
+    width: 100%;
+  }
+
+  .comanda-header-acoes {
+    margin-left: auto;
+  }
+
+  .comanda-titulo h1 {
+    font-size: 24px;
+  }
+
+  .comanda-card-header {
+    padding: 18px;
+  }
+
+  .comanda-busca {
+    padding: 16px 18px;
+  }
+
+  .comanda-produtos-lista {
+    padding: 0 18px 18px;
+  }
+
+  .comanda-itens {
+    padding: 16px 18px;
+  }
+
+  .comanda-totais {
+    padding: 18px;
+  }
+
+  .comanda-btn-principal {
+    width: calc(100% - 36px);
+    margin: 0 18px 18px;
+  }
+
+  .produto-comanda {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .produto-comanda-acoes {
+    width: 100%;
+  }
+
+  .produto-comanda-acoes input {
+    flex: 0 0 60px;
+  }
+
+  .produto-comanda-acoes button {
+    flex: 1;
+  }
+
+  .comanda-item-acoes {
+    align-items: stretch;
+  }
+
+  .comanda-btn-status {
+    flex: 1;
+    min-width: 150px;
+  }
+}
+
+/* =========================================================
+   PAGAMENTO NO CELULAR
+========================================================= */
+
+@media (max-width: 600px) {
+  .pagamento-overlay {
+    align-items: flex-end;
+    padding: 0;
+  }
+
+  .pagamento-modal {
+    width: 100%;
+    max-height: 95vh;
+    border-radius: 20px 20px 0 0;
+  }
+
+  .pagamento-header {
+    padding: 20px;
+  }
+
+  .pagamento-total,
+  .pagamento-form {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .pagamento-restante {
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+
+  .formas-pagamento {
+    gap: 8px;
+  }
+
+  .formas-pagamento button {
+    min-height: 78px;
+    font-size: 12px;
+  }
+
+  .pagamento-acoes {
+    grid-template-columns: 1fr;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}

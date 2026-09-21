@@ -1,162 +1,384 @@
+/* =========================================================
+   PÁGINA DE VENDAS
+========================================================= */
+
 .vendas-page {
+  position: relative;
   min-height: 100vh;
   padding: 24px;
+  box-sizing: border-box;
+
   background: #f5f6f8;
+
+  overflow: hidden;
 }
 
+/* =========================================================
+   LOGO DE FUNDO
+========================================================= */
+
+.vendas-logo-fundo {
+  position: fixed;
+
+  top: 50%;
+  left: 50%;
+
+  width: 75vw;
+  height: 75vh;
+
+  transform: translate(-50%, -50%);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  pointer-events: none;
+  user-select: none;
+
+  z-index: 0;
+}
+
+.vendas-logo-fundo img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: contain;
+
+  opacity: 0.075;
+
+  filter: grayscale(100%);
+}
+
+/* =========================================================
+   CONTAINER
+========================================================= */
+
 .vendas-container {
+  position: relative;
+
   max-width: 1400px;
   margin: 0 auto;
+
+  z-index: 1;
 }
+
+/* =========================================================
+   CABEÇALHO
+========================================================= */
 
 .vendas-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+
   margin-bottom: 24px;
 }
 
 .vendas-header h1 {
   margin: 0;
+
   font-size: 28px;
+  font-weight: 700;
+
+  color: #1f2937;
 }
 
 .vendas-header p {
   margin: 6px 0 0;
+
   color: #666;
 }
 
 .vendas-voltar {
-  border: none;
-  background: #fff;
+  border: 1px solid #e5e7eb;
+
+  background: rgba(255, 255, 255, 0.95);
+
   padding: 10px 16px;
+
   border-radius: 8px;
+
   cursor: pointer;
+
   font-weight: 600;
+
+  color: #374151;
+
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
 }
+
+.vendas-voltar:hover {
+  background: #ffffff;
+
+  border-color: #d1d5db;
+
+  transform: translateX(-2px);
+}
+
+/* =========================================================
+   MENSAGEM
+========================================================= */
+
+.mensagem-venda {
+  padding: 12px 14px;
+
+  margin-bottom: 16px;
+
+  border-radius: 8px;
+
+  background: rgba(241, 241, 241, 0.95);
+
+  color: #374151;
+}
+
+/* =========================================================
+   GRID PRINCIPAL
+========================================================= */
 
 .vendas-grid {
   display: grid;
-  grid-template-columns: 1fr 420px;
+
+  grid-template-columns:
+    minmax(0, 1fr)
+    420px;
+
   gap: 24px;
 }
 
+/* =========================================================
+   CARDS
+========================================================= */
+
 .vendas-card {
-  background: #fff;
-  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.94);
+
+  border: 1px solid rgba(229, 231, 235, 0.9);
+
+  border-radius: 14px;
+
   padding: 20px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+
+  box-shadow:
+    0 2px 10px rgba(0, 0, 0, 0.05),
+    0 10px 30px rgba(0, 0, 0, 0.025);
+
+  backdrop-filter: blur(4px);
 }
 
 .vendas-card h2 {
   margin-top: 0;
+
   margin-bottom: 18px;
+
+  color: #1f2937;
 }
+
+/* =========================================================
+   BUSCA
+========================================================= */
 
 .vendas-busca {
   display: flex;
+
   gap: 10px;
+
   margin-bottom: 20px;
 }
 
 .vendas-busca input {
   flex: 1;
+
+  min-width: 0;
+
   padding: 12px;
+
   border: 1px solid #ddd;
+
   border-radius: 8px;
+
   outline: none;
+
+  background: #fff;
+
+  font-size: 14px;
+
+  box-sizing: border-box;
 }
 
 .vendas-busca input:focus {
   border-color: #555;
 }
 
+.vendas-busca button {
+  border: none;
+
+  padding: 0 18px;
+
+  border-radius: 8px;
+
+  background: #222;
+
+  color: #fff;
+
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+.vendas-busca button:hover {
+  background: #000;
+}
+
+/* =========================================================
+   PRODUTOS
+========================================================= */
+
 .vendas-produtos {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
   gap: 12px;
+
   max-height: 560px;
+
   overflow-y: auto;
+
+  padding-right: 3px;
 }
 
 .produto-venda {
   border: 1px solid #e2e2e2;
+
   border-radius: 10px;
+
   padding: 14px;
+
   cursor: pointer;
-  transition: 0.2s;
+
+  background: rgba(255, 255, 255, 0.92);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
 }
 
 .produto-venda:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+
+  border-color: #d4d4d4;
+
+  box-shadow:
+    0 5px 14px rgba(0, 0, 0, 0.08);
 }
 
 .produto-venda h3 {
   margin: 0 0 8px;
+
   font-size: 16px;
+
+  color: #1f2937;
 }
 
 .produto-venda-info {
   display: flex;
+
   justify-content: space-between;
+
   gap: 10px;
+
   font-size: 14px;
 }
 
 .produto-preco {
   font-weight: 700;
+
+  color: #111827;
 }
 
 .produto-estoque {
   color: #666;
 }
 
+.sem-produtos {
+  text-align: center;
+
+  padding: 30px;
+
+  color: #777;
+}
+
+/* =========================================================
+   CARRINHO
+========================================================= */
+
 .carrinho {
   position: sticky;
+
   top: 20px;
 }
 
 .carrinho-vazio {
   text-align: center;
+
   padding: 40px 10px;
+
   color: #777;
 }
 
 .carrinho-item {
   display: flex;
+
   justify-content: space-between;
+
   gap: 12px;
+
   padding: 14px 0;
+
   border-bottom: 1px solid #eee;
 }
 
 .carrinho-item-info {
   flex: 1;
+
+  min-width: 0;
 }
 
 .carrinho-item-nome {
   font-weight: 600;
+
   margin-bottom: 6px;
 }
 
 .carrinho-item-preco {
   color: #666;
+
   font-size: 14px;
 }
 
 .carrinho-controles {
   display: flex;
+
   align-items: center;
+
   gap: 8px;
 }
 
 .carrinho-controles button {
   width: 30px;
   height: 30px;
+
   border: 1px solid #ddd;
+
   background: #fff;
+
   border-radius: 6px;
+
   cursor: pointer;
 }
 
@@ -166,36 +388,57 @@
 
 .carrinho-quantidade {
   min-width: 25px;
+
   text-align: center;
 }
 
 .carrinho-remover {
   color: #c62828;
+
   border-color: #e0a0a0 !important;
 }
 
+/* =========================================================
+   RESUMO
+========================================================= */
+
 .venda-resumo {
   margin-top: 20px;
+
   padding-top: 20px;
+
   border-top: 1px solid #ddd;
 }
 
 .resumo-linha {
   display: flex;
+
   justify-content: space-between;
+
   margin-bottom: 12px;
 }
 
 .resumo-total {
   font-size: 22px;
+
   font-weight: 700;
+
   margin-top: 16px;
+
+  color: #111827;
 }
+
+/* =========================================================
+   DESCONTO
+========================================================= */
 
 .desconto {
   display: flex;
+
   align-items: center;
+
   gap: 10px;
+
   margin: 16px 0;
 }
 
@@ -205,10 +448,19 @@
 
 .desconto input {
   width: 120px;
+
   padding: 10px;
+
   border: 1px solid #ddd;
+
   border-radius: 8px;
+
+  box-sizing: border-box;
 }
+
+/* =========================================================
+   FORMA DE PAGAMENTO
+========================================================= */
 
 .forma-pagamento {
   margin-top: 18px;
@@ -216,17 +468,29 @@
 
 .forma-pagamento label {
   display: block;
+
   margin-bottom: 8px;
+
   font-weight: 600;
 }
 
 .forma-pagamento select {
   width: 100%;
+
   padding: 11px;
+
   border: 1px solid #ddd;
+
   border-radius: 8px;
+
   background: #fff;
+
+  box-sizing: border-box;
 }
+
+/* =========================================================
+   OBSERVAÇÃO
+========================================================= */
 
 .observacao {
   margin-top: 18px;
@@ -234,30 +498,51 @@
 
 .observacao label {
   display: block;
+
   margin-bottom: 8px;
+
   font-weight: 600;
 }
 
 .observacao textarea {
   width: 100%;
+
   min-height: 80px;
+
   padding: 10px;
+
   border: 1px solid #ddd;
+
   border-radius: 8px;
+
   resize: vertical;
+
   box-sizing: border-box;
 }
 
+/* =========================================================
+   FINALIZAR VENDA
+========================================================= */
+
 .finalizar-venda {
   width: 100%;
+
   margin-top: 20px;
+
   padding: 14px;
+
   border: none;
+
   border-radius: 8px;
+
   background: #222;
+
   color: #fff;
+
   font-size: 16px;
+
   font-weight: 700;
+
   cursor: pointer;
 }
 
@@ -267,38 +552,38 @@
 
 .finalizar-venda:disabled {
   opacity: 0.5;
+
   cursor: not-allowed;
 }
 
 .btn-imprimir {
   width: 100%;
+
   margin-top: 10px;
+
   padding: 12px;
+
   border: 1px solid #ddd;
+
   border-radius: 8px;
+
   background: #fff;
+
   cursor: pointer;
+
+  font-weight: 600;
 }
 
 .btn-imprimir:hover {
   background: #f5f5f5;
 }
 
-.mensagem-venda {
-  padding: 12px;
-  margin-bottom: 16px;
-  border-radius: 8px;
-  background: #f1f1f1;
-}
+/* =========================================================
+   RESPONSIVO - TABLET
+========================================================= */
 
-.sem-produtos {
-  text-align: center;
-  padding: 30px;
-  color: #777;
-}
-
-/* Responsivo */
 @media (max-width: 1000px) {
+
   .vendas-grid {
     grid-template-columns: 1fr;
   }
@@ -306,17 +591,34 @@
   .carrinho {
     position: static;
   }
+
+  .vendas-logo-fundo {
+    width: 70vw;
+    height: 70vh;
+  }
+
 }
 
+/* =========================================================
+   RESPONSIVO - CELULAR
+========================================================= */
+
 @media (max-width: 650px) {
+
   .vendas-page {
     padding: 14px;
   }
 
   .vendas-header {
     align-items: flex-start;
+
     gap: 12px;
+
     flex-direction: column;
+  }
+
+  .vendas-header h1 {
+    font-size: 24px;
   }
 
   .vendas-produtos {
@@ -327,6 +629,10 @@
     flex-direction: column;
   }
 
+  .vendas-busca button {
+    min-height: 42px;
+  }
+
   .carrinho-item {
     flex-direction: column;
   }
@@ -334,4 +640,14 @@
   .carrinho-controles {
     justify-content: flex-start;
   }
+
+  .vendas-logo-fundo {
+    width: 85vw;
+    height: 65vh;
+  }
+
+  .vendas-logo-fundo img {
+    opacity: 0.055;
+  }
+
 }

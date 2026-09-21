@@ -10,7 +10,7 @@ export default function Navbar() {
   return (
     <header className="navbar">
       <div>
-        <h1>Sistema de Estoque</h1>
+        <h1>Sistema de Gestão</h1>
         <p>Olá, {nome}</p>
       </div>
 

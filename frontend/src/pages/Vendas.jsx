@@ -31,40 +31,54 @@ export default function Vendas() {
   }, []);
 
   async function carregarDados() {
-    try {
-      setCarregando(true);
+  try {
+    setCarregando(true);
+    setMensagem("");
 
-      const [produtosResponse, empresaResponse] = await Promise.all([
-        api.get("/produtos", {
-          params: {
-            page: 1,
-            limit: 1000,
-            status: "ok",
-          },
-        }),
-        api.get("/empresa"),
-      ]);
-
-      const listaProdutos =
-        produtosResponse.data?.produtos ||
-        produtosResponse.data?.data ||
-        produtosResponse.data ||
-        [];
-
-      setProdutos(Array.isArray(listaProdutos) ? listaProdutos : []);
-
-      setEmpresa(empresaResponse.data || null);
-    } catch (error) {
-      console.error("Erro ao carregar dados da venda:", error);
-
-      setMensagem(
-        error.response?.data?.error ||
-          "Não foi possível carregar os dados da venda."
-      );
-    } finally {
-      setCarregando(false);
-    }
+    const produtosResponse = await api.get(
+  "/produtos",
+  {
+    params: {
+      contexto: "venda",
+    },
   }
+);
+
+    console.log("RESPOSTA PRODUTOS:", produtosResponse.data);
+
+    const listaProdutos =
+      produtosResponse.data?.itens || [];
+
+    setProdutos(
+      Array.isArray(listaProdutos)
+        ? listaProdutos
+        : []
+    );
+
+    try {
+      const empresaResponse = await api.get("/empresa");
+      setEmpresa(empresaResponse.data || null);
+    } catch (empresaError) {
+      console.warn(
+        "Não foi possível carregar a empresa:",
+        empresaError
+      );
+      setEmpresa(null);
+    }
+  } catch (error) {
+    console.error(
+      "Erro ao carregar produtos:",
+      error
+    );
+
+    setMensagem(
+      error.response?.data?.error ||
+        "Não foi possível carregar os produtos."
+    );
+  } finally {
+    setCarregando(false);
+  }
+}
 
   // =========================================================
   // PRODUTOS FILTRADOS
@@ -636,9 +650,19 @@ export default function Vendas() {
     );
   }
 
-  return (
-    <div className="vendas-page">
-      <div className="vendas-container">
+ return (
+  <div className="vendas-page">
+
+    {empresa?.logoUrl && (
+      <div className="vendas-logo-fundo" aria-hidden="true">
+        <img
+          src={empresa.logoUrl}
+          alt=""
+        />
+      </div>
+    )}
+
+    <div className="vendas-container">
 
         {/* =====================================================
             CABEÇALHO

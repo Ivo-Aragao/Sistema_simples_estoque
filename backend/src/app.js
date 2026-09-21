@@ -11,6 +11,9 @@ const fornecedorRoutes = require("./routes/fornecedorRoutes");
 const importacaoRoutes = require("./routes/importacaoRoutes");
 const empresaRoutes = require("./routes/empresaRoutes");
 const vendaRoutes = require("./routes/vendaRoutes");
+const mesaRoutes = require("./routes/mesaRoutes");
+const comandaRoutes = require("./routes/comandaRoutes");
+
 const app = express();
 
 app.use(cors());
@@ -26,9 +29,14 @@ app.use("/empresa", empresaRoutes);
 app.use("/fornecedores", fornecedorRoutes);
 app.use("/importacoes", importacaoRoutes);
 app.use("/vendas", vendaRoutes);
+app.use("/mesas", mesaRoutes);
+app.use("/comandas", comandaRoutes);
 
 app.get("/", (req, res) => {
-  res.json({ message: "API do sistema de estoque funcionando" });
+  res.json({
+    message:
+      "API do sistema de estoque funcionando",
+  });
 });
 
 module.exports = app;
