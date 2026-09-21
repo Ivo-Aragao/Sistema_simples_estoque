@@ -81,17 +81,7 @@ export default function Dashboard() {
           </div>
         )}
       </div>
-        <div className="panel">
-  <h3>Movimentações do mês</h3>
-
-  <BarChart width={400} height={300} data={dataGrafico}>
-    <CartesianGrid strokeDasharray="3 3" />
-    <XAxis dataKey="nome" />
-    <YAxis />
-    <Tooltip />
-    <Bar dataKey="valor" />
-  </BarChart>
-</div>
+        
       <div className="panel">
         <h3>Últimas movimentações</h3>
         <div className="list">
