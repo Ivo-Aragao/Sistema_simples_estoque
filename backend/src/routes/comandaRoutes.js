@@ -10,6 +10,8 @@ const {
   removerItem,
   atualizarStatusItem,
   registrarPagamento,
+  alterarTaxaServico,
+  marcarItemNaoCobravel,
 } = require("../controllers/comandaController");
 
 const router = express.Router();
@@ -44,6 +46,12 @@ router.patch(
   atualizarStatusItem
 );
 
+router.patch(
+  "/:id/itens/:itemId/nao-cobravel",
+  authMiddleware,
+  marcarItemNaoCobravel
+);
+
 router.delete(
   "/:id/itens/:itemId",
   authMiddleware,
@@ -54,6 +62,12 @@ router.post(
   "/:id/pagamentos",
   authMiddleware,
   registrarPagamento
+);
+
+router.patch(
+  "/:id/taxa-servico",
+  authMiddleware,
+  alterarTaxaServico
 );
 
 module.exports = router;

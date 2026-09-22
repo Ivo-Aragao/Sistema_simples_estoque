@@ -91,9 +91,15 @@ model Venda {
   usuarioId      Int
   empresaId      Int?
   comandaId      Int?     @unique
+
   subtotal       Float
   desconto       Float    @default(0)
+
+  taxaServicoPercentual Float @default(0)
+  taxaServico            Float @default(0)
+
   total          Float
+
   formaPagamento String
   status         String   @default("FINALIZADA")
   observacao     String?
@@ -146,6 +152,9 @@ model Mesa {
 
   observacao    String?
 
+  taxaServicoAtiva      Boolean @default(false)
+  taxaServicoPercentual Float   @default(0)
+
   vendaId       Int?      @unique
 
   criadoEm      DateTime  @default(now())
@@ -165,7 +174,7 @@ model ComandaItem {
   comandaId     Int
   produtoId     Int
 
-  quantidade    Int
+  quantidade       Int
   quantidadeServida Int @default(0)
 
   precoUnitario Float
@@ -175,11 +184,15 @@ model ComandaItem {
 
   status        String   @default("PENDENTE")
 
-  criadoEm     DateTime  @default(now())
-  enviadoEm    DateTime?
-  preparandoEm DateTime?
-  prontoEm     DateTime?
-  servidoEm    DateTime?
+  cobrar            Boolean  @default(true)
+  motivoNaoCobranca String?
+  ajustadoEm        DateTime?
+
+  criadoEm      DateTime  @default(now())
+  enviadoEm     DateTime?
+  preparandoEm  DateTime?
+  prontoEm      DateTime?
+  servidoEm     DateTime?
 
   comanda       Comanda  @relation(fields: [comandaId], references: [id])
   produto       Produto  @relation(fields: [produtoId], references: [id])
