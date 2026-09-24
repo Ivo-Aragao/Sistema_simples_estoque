@@ -23,6 +23,9 @@ model Usuario {
   vendas           Venda[]
   movimentacoes    Movimentacao[]
   comandas         Comanda[]
+
+  caixasAbertura   Caixa[] @relation("CaixasAbertura")
+  caixasFechamento Caixa[] @relation("CaixasFechamento")
 }
 
 model Empresa {
@@ -33,6 +36,7 @@ model Empresa {
   vendas    Venda[]
   usuarios  Usuario[]
   mesas     Mesa[]
+  caixas    Caixa[]
 }
 
 model Categoria {
@@ -85,12 +89,15 @@ model Movimentacao {
   produto Produto   @relation(fields: [produtoId], references: [id])
   usuario Usuario?  @relation(fields: [usuarioId], references: [id])
 }
+
 model Venda {
   id             Int      @id @default(autoincrement())
   codigo         String   @unique @default(cuid())
   usuarioId      Int
   empresaId      Int?
   comandaId      Int?     @unique
+
+  caixaId        Int?
 
   subtotal       Float
   desconto       Float    @default(0)
@@ -108,6 +115,8 @@ model Venda {
   usuario Usuario  @relation(fields: [usuarioId], references: [id])
   empresa Empresa? @relation(fields: [empresaId], references: [id])
   comanda Comanda? @relation(fields: [comandaId], references: [id])
+  caixa   Caixa?   @relation(fields: [caixaId], references: [id])
+
   itens   ItemVenda[]
 }
 
@@ -210,4 +219,43 @@ model Pagamento {
   criadoEm    DateTime @default(now())
 
   comanda     Comanda  @relation(fields: [comandaId], references: [id])
+}
+
+model Caixa {
+  id Int @id @default(autoincrement())
+
+  empresaId Int
+
+  usuarioAberturaId   Int?
+  usuarioFechamentoId Int?
+
+  aberturaEm   DateTime  @default(now())
+  fechamentoEm DateTime?
+
+  saldoInicial  Float @default(0)
+  saldoEsperado Float @default(0)
+  saldoFinal    Float?
+  diferenca     Float?
+
+  totalVendas   Float @default(0)
+  totalDinheiro Float @default(0)
+  totalPix      Float @default(0)
+  totalCartao   Float @default(0)
+  totalOutros   Float @default(0)
+
+  status String @default("ABERTO")
+
+  fechamentoAutomatico Boolean @default(false)
+  aberturaAutomatica   Boolean @default(false)
+
+  observacao String?
+
+  empresa Empresa @relation(fields: [empresaId], references: [id])
+
+  usuarioAbertura   Usuario? @relation("CaixasAbertura", fields: [usuarioAberturaId], references: [id])
+  usuarioFechamento Usuario? @relation("CaixasFechamento", fields: [usuarioFechamentoId], references: [id])
+
+  vendas Venda[]
+
+  @@index([empresaId, status])
 }

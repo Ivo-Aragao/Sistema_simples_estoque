@@ -13,6 +13,7 @@ const empresaRoutes = require("./routes/empresaRoutes");
 const vendaRoutes = require("./routes/vendaRoutes");
 const mesaRoutes = require("./routes/mesaRoutes");
 const comandaRoutes = require("./routes/comandaRoutes");
+const caixaRoutes = require("./routes/caixaRouter");
 
 const app = express();
 
@@ -31,6 +32,7 @@ app.use("/importacoes", importacaoRoutes);
 app.use("/vendas", vendaRoutes);
 app.use("/mesas", mesaRoutes);
 app.use("/comandas", comandaRoutes);
+app.use("/caixas", caixaRoutes);
 
 app.get("/", (req, res) => {
   res.json({

@@ -4,6 +4,10 @@ const {
   obterIO,
 } = require("../socket");
 
+const {
+  garantirCaixaDoDia,
+} = require("../services/caixaService");
+
 // ============================================================
 // STATUS DOS ITENS DA COMANDA
 // ============================================================
@@ -54,7 +58,10 @@ const TRANSICOES_ITEM = {
 const FORMAS_PAGAMENTO = [
   "DINHEIRO",
   "PIX",
-  "CARTAO",
+  "CARTAO_CREDITO",
+  "CARTAO_DEBITO",
+  "TRANSFERENCIA",
+  "OUTRO",
 ];
 
 // ============================================================
@@ -453,6 +460,22 @@ async function registrarPagamento(
           }
 
           // ==================================================
+          // GARANTIR CAIXA DO DIA
+          // ==================================================
+
+          const caixa =
+            await garantirCaixaDoDia(
+              usuario.empresaId,
+              tx
+            );
+
+          if (!caixa) {
+            throw new Error(
+              "Não existe caixa aberto. Abra o caixa antes de fechar a comanda."
+            );
+          }
+
+          // ==================================================
           // ITENS COBRÁVEIS
           // ==================================================
 
@@ -558,6 +581,11 @@ async function registrarPagamento(
 
                 comandaId:
                   comanda.id,
+
+                // A VENDA DA COMANDA
+                // PERTENCE AO CAIXA DO DIA
+                caixaId:
+                  caixa.id,
 
                 subtotal,
 
@@ -739,6 +767,8 @@ async function registrarPagamento(
             total,
 
             venda,
+
+            caixa,
 
             comanda:
               comandaFechada,
