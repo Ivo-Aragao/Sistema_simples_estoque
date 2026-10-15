@@ -50,7 +50,10 @@ model Fornecedor {
   nome      String
   telefone  String?
   email     String?
-  produtos  Produto[]
+
+  produtos Produto[]
+
+  produtosVinculados ProdutoFornecedor[]
 }
 
 model Produto {
@@ -70,11 +73,43 @@ model Produto {
   disponivelVenda   Boolean  @default(true)
   disponivelComanda Boolean  @default(false)
 
-  categoria         Categoria?    @relation(fields: [categoriaId], references: [id])
-  fornecedor        Fornecedor?   @relation(fields: [fornecedorId], references: [id])
-  itensVenda        ItemVenda[]
-  movimentacoes     Movimentacao[]
-  itensComanda      ComandaItem[]
+  categoria   Categoria?  @relation(fields: [categoriaId], references: [id])
+  fornecedor  Fornecedor? @relation(fields: [fornecedorId], references: [id])
+
+  itensVenda       ItemVenda[]
+  movimentacoes   Movimentacao[]
+  itensComanda     ComandaItem[]
+
+  fornecedoresVinculados ProdutoFornecedor[]
+}
+
+model ProdutoFornecedor {
+  id           Int @id @default(autoincrement())
+
+  produtoId    Int
+  fornecedorId Int
+
+  // Código utilizado pelo fornecedor na NFe
+  codigoProduto String?
+
+  // Código de barras informado pelo fornecedor nessa NFe
+  codigoBarra String?
+
+  // Nome exatamente como veio no XML
+  nomeOriginal String?
+
+  // Nome normalizado para facilitar próximas comparações
+  nomeNormalizado String?
+
+  criadoEm    DateTime @default(now())
+  atualizadoEm DateTime @updatedAt
+
+  produto    Produto    @relation(fields: [produtoId], references: [id])
+  fornecedor Fornecedor @relation(fields: [fornecedorId], references: [id])
+
+  @@unique([fornecedorId, codigoProduto])
+  @@index([fornecedorId, codigoBarra])
+  @@index([fornecedorId, nomeNormalizado])
 }
 
 model Movimentacao {
@@ -117,7 +152,7 @@ model Venda {
   comanda Comanda? @relation(fields: [comandaId], references: [id])
   caixa   Caixa?   @relation(fields: [caixaId], references: [id])
 
-  itens   ItemVenda[]
+  itens ItemVenda[]
 }
 
 model ItemVenda {
@@ -143,82 +178,82 @@ model Mesa {
   empresaId   Int?
   empresa     Empresa? @relation(fields: [empresaId], references: [id])
 
-  comandas    Comanda[]
+  comandas Comanda[]
 
-  criadaEm    DateTime @default(now())
+  criadaEm DateTime @default(now())
 
   @@unique([empresaId, numero])
 }
 
-  model Comanda {
+model Comanda {
   id        Int    @id @default(autoincrement())
   codigo    String @unique @default(cuid())
 
-  mesaId        Int?
-  usuarioId     Int
+  mesaId    Int?
+  usuarioId Int
 
-  status        String   @default("ABERTA")
+  status String @default("ABERTA")
 
-  observacao    String?
+  observacao String?
 
   taxaServicoAtiva      Boolean @default(false)
   taxaServicoPercentual Float   @default(0)
 
-  vendaId       Int?      @unique
+  vendaId Int? @unique
 
-  criadoEm      DateTime  @default(now())
-  fechadoEm     DateTime?
+  criadoEm  DateTime  @default(now())
+  fechadoEm DateTime?
 
-  mesa          Mesa?     @relation(fields: [mesaId], references: [id])
-  usuario       Usuario   @relation(fields: [usuarioId], references: [id])
-  venda         Venda?
+  mesa    Mesa?    @relation(fields: [mesaId], references: [id])
+  usuario Usuario @relation(fields: [usuarioId], references: [id])
+  venda   Venda?
 
-  itens         ComandaItem[]
-  pagamentos    Pagamento[]
+  itens      ComandaItem[]
+  pagamentos Pagamento[]
 }
 
 model ComandaItem {
-  id            Int      @id @default(autoincrement())
+  id Int @id @default(autoincrement())
 
-  comandaId     Int
-  produtoId     Int
+  comandaId Int
+  produtoId Int
 
-  quantidade       Int
+  quantidade        Int
   quantidadeServida Int @default(0)
 
   precoUnitario Float
   subtotal      Float
 
-  observacao    String?
+  observacao String?
 
-  status        String   @default("PENDENTE")
+  status String @default("PENDENTE")
 
   cobrar            Boolean  @default(true)
   motivoNaoCobranca String?
   ajustadoEm        DateTime?
 
-  criadoEm      DateTime  @default(now())
-  enviadoEm     DateTime?
-  preparandoEm  DateTime?
-  prontoEm      DateTime?
-  servidoEm     DateTime?
+  criadoEm    DateTime  @default(now())
+  enviadoEm   DateTime?
+  preparandoEm DateTime?
+  prontoEm    DateTime?
+  servidoEm   DateTime?
 
-  comanda       Comanda  @relation(fields: [comandaId], references: [id])
-  produto       Produto  @relation(fields: [produtoId], references: [id])
+  comanda Comanda @relation(fields: [comandaId], references: [id])
+  produto Produto @relation(fields: [produtoId], references: [id])
 }
 
 model Pagamento {
-  id          Int      @id @default(autoincrement())
+  id Int @id @default(autoincrement())
 
-  comandaId   Int
+  comandaId Int
 
-  valor       Float
-  forma       String
-  status      String   @default("PAGO")
+  valor  Float
+  forma  String
+  status String @default("PAGO")
 
-  criadoEm    DateTime @default(now())
+  criadoEm DateTime @default(now())
 
-  comanda     Comanda  @relation(fields: [comandaId], references: [id])
+  comanda Comanda @relation(fields: [comandaId], references: [id])
 }
 
 model Caixa {
